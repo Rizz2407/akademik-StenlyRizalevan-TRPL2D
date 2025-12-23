@@ -12,12 +12,12 @@
         <form action="" method="post">
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <input name="email" type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
                 <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
             </div>
             <div class="mb-3">
                 <label for="exampleInputPassword1" class="form-label">Password</label>
-                <input type="password" class="form-control" id="exampleInputPassword1">
+                <input name="password" type="password" class="form-control" id="exampleInputPassword1">
             </div>
             <div class="mb-3 form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
@@ -26,7 +26,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
         <?php
-        if ($_ISSER($_POST ['email'])) {
+        if (isset($_POST ['email'])) {
             $email = $_POST ['email'];
             $pw = md5($_POST ['password']);
             require 'connect_db.php';
@@ -34,7 +34,12 @@
             $result = $db->query($ceklogin);
             
             if ($result->num_rows > 0) {
-                echo "Login Berhasil";
+                // buat session
+                session_start();
+                $_SESSION['login'] = true;
+                $_SESSION['email'] = $email;
+                header('Location: index.php');
+                exit;
             } else {
                 echo "Login Gagal";
             }
