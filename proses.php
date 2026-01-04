@@ -7,9 +7,10 @@ if ($aksi == 'insert') {
     $nama_mhs = $_POST['nama_mhs'];
     $tgl_lahir = $_POST['tgl_lahir'];
     $alamat = $_POST['alamat'];
+    $prodi_id = $_POST['prodi_id'];
 
-    $query = "INSERT INTO mahasiswa(nim,nama_mhs,tgl_lahir,alamat)
-            VALUES($nim,'$nama_mhs','$tgl_lahir','$alamat')";
+    $query = "INSERT INTO mahasiswa(nim,nama_mhs,tgl_lahir,alamat,prodi_id)
+            VALUES($nim,'$nama_mhs','$tgl_lahir','$alamat','$prodi_id')";
     $sql = $db->query($query); //eksekusi query
 
     if ($sql){
@@ -30,9 +31,8 @@ if ($aksi == 'insert') {
                 nim='$nim',
                 nama_mhs = '$nama_mhs',
                 tgl_lahir = '$tgl_lahir',
-                alamat = '$alamat',
-                WHERE nim = '$nim'_lama";
-
+                alamat = '$alamat'
+                WHERE nim = '$nim_lama'";
     $sql = $db->query($query); //eksekusi query
 
     if ($sql) {
@@ -42,7 +42,7 @@ if ($aksi == 'insert') {
     }
 }elseif ($aksi == "delete") {
     if (isset($_GET['nim'])) {
-        $id = $_GET['nim'];
+        $nim = $_GET['nim'];
         $query = "DELETE FROM mahasiswa WHERE nim = '$nim'";
         $sql = $db->query($query);
         if ($sql) {
@@ -79,7 +79,7 @@ if ($aksi == 'insert') {
                 nama_prodi = '$nama_prodi',
                 jenjang = '$jenjang',
                 keterangan = '$keterangan'
-                WHERE id = '$id_lama'";
+                WHERE prodi_id = '$id_lama'";
 
     $sql = $db->query($query); //eksekusi query
 
@@ -91,7 +91,7 @@ if ($aksi == 'insert') {
 }elseif ($aksi == "deletep") {
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
-        $query = "DELETE FROM prodi WHERE id = '$id'";
+        $query = "DELETE FROM prodi WHERE prodi_id = '$id'";
         $sql = $db->query($query);
         if ($sql) {
             header("Location: index.php");

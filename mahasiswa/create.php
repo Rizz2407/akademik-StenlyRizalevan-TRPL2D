@@ -1,3 +1,7 @@
+<?php
+include 'connect_db.php';
+$prodi = $db->query("SELECT prodi_id, nama_prodi, jenjang FROM prodi");
+?>
 <h1>Input Data Mahasiswa</h1>
 <form method="POST" action="proses.php?aksi=insert">
     <div class="mb-3">
@@ -11,6 +15,16 @@
     <div class="mb-3">
         <label for="tgl_lahir" class="form-label">Tanggal Lahir</label>
         <input type="date" class="form-control" id="tgl_lahir" name="tgl_lahir">
+    </div>
+    <div class="mb-3">
+        <select name="prodi_id" class="form-control" required>
+            <option value="">-- Pilih Program Studi --</option>
+            <?php while ($row = $prodi->fetch_assoc()) { ?>
+                <option value="<?= $row['prodi_id']; ?>">
+                    <?= $row['nama_prodi']; ?> (<?= $row['jenjang']; ?>)
+                </option>
+            <?php } ?>
+        </select>
     </div>
     <div class="mb-3">
         <label for="alamat" class="form-label">Alamat</label>

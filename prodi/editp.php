@@ -1,7 +1,7 @@
 <?php
 require 'connect_db.php';
-$id = $_GET['id'];
-$sql = $db->query("SELECT * FROM prodi WHERE id = '$id'");
+$id = $_GET['id'] ?? '';
+$sql = $db->query("SELECT * FROM prodi WHERE prodi_id = '$id'");
 $data = $sql->fetch_assoc();
 ?>
 <!DOCTYPE html>
@@ -16,7 +16,7 @@ $data = $sql->fetch_assoc();
     <div class="container my-4">
         <form method="POST" action="proses.php?aksi=updatep">
             <h1>Edit Data Prodi</h1>
-            <input type="hidden" name="id_lama" value="<?= $data['id'] ?>">
+            <input type="hidden" name="id_lama" value="<?= $data['prodi_id'] ?>">
             <div class="mb-3">
                 <label for="nama_prodi" class="form-label">Nama Prodi</label>
                 <input type="text" class="form-control" id="nama_prodi" name="nama_prodi" value="<?= $data['nama_prodi'] ?>">

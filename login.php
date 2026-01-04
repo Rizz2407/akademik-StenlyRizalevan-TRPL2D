@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Bootstrap demo</title>
+        <title>Login Akademik/title>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     </head>
     <body>
@@ -30,7 +30,7 @@
             $email = $_POST ['email'];
             $pw = md5($_POST ['password']);
             require 'connect_db.php';
-            $ceklogin = "SELECT * FROM users WHERE email = '$email' AND password = '$pw'";
+            $ceklogin = "SELECT * FROM pengguna WHERE email = '$email' AND password = '$pw'";
             $result = $db->query($ceklogin);
             
             if ($result->num_rows > 0) {

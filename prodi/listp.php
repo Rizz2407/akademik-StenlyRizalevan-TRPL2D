@@ -19,12 +19,12 @@
                         while($data = $sql->fetch_assoc()) {
                     ?>
                         <tr>
-                            <th class="table-secondary"><?= $data['id']?></th>
+                            <th class="table-secondary"><?= $data['prodi_id']?></th>
                             <td class="table-secondary"><?= $data['nama_prodi'] ?></td>
                             <td class="table-secondary"><?= $data['jenjang'] ?></td>
                             <td class="table-secondary"><?= $data['keterangan'] ?></td>
-                            <td class="table-secondary"><a href="index.php?id=<?= $data['id'] ?>&page=editp" class="btn btn-warning btn-sm">EDIT</a>  
-                            <a href="proses.php?id=<?= $data['id']; ?>" class="btn btn-danger btn-sm" 
+                            <td class="table-secondary"><a href="index.php?id=<?= $data['prodi_id'] ?>&page=editp" class="btn btn-warning btn-sm">EDIT</a>  
+                            <a href="proses.php?aksi=deletep&id=<?= $data['prodi_id']; ?>" class="btn btn-danger btn-sm" 
                             onclick="return confirm('Yakin ingin menghapus data ini?')">
                             DELETE
                             </a>

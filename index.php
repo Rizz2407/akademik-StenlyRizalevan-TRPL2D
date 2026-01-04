@@ -33,6 +33,8 @@ if (!isset($_SESSION['login'])) {
                 <a class="nav-link" href="index.php?page=dataprodi">Data Prodi</a>
                 <a class="nav-link active" href="index.php">Data Akademik</a>
             </div>
+            <div class="navbar-nav ms-auto">
+                <a class="nav-link" href="logout.php">Logout</a>
         </div>
     </div>
 </nav>
