@@ -102,6 +102,58 @@ if ($aksi == 'insert') {
     } else {
         echo "ID not provided.";
     }
+}elseif ($aksi === "updatepengguna") {
+    session_start();
+    if (!isset($_SESSION['email'])) {
+        die("Akses tidak sah");
+    }
+    $email = $_SESSION['email'];
+    $nama  = trim($_POST['nama']);
+    if ($nama === '') {
+        die("Nama tidak boleh kosong");
+    }
+    $stmt = $db->prepare("SELECT password FROM pengguna WHERE email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result()->fetch_assoc();
+    if (!$result) {
+        die("Pengguna tidak ditemukan");
+    }
+    if (!empty($_POST['passwordbaru'])) {
+
+        if (empty($_POST['passwordlama'])) {
+            die("Password lama wajib diisi");
+        }
+
+        if ($_POST['passwordbaru'] !== $_POST['konfirmasipassword']) {
+            die("Konfirmasi password tidak cocok");
+        }
+
+        if (strlen($_POST['passwordbaru']) < 8) {
+            die("Password minimal 8 karakter");
+        }
+        $hash = $result['password'];
+        if (!password_verify($_POST['passwordlama'], $hash) && md5($_POST['passwordlama']) !== $hash) {
+        die("Password lama salah");
+        }
+
+        $passwordBaru = password_hash($_POST['passwordbaru'], PASSWORD_DEFAULT);
+        $stmt = $db->prepare(
+            "UPDATE pengguna SET nama = ?, password = ? WHERE email = ?"
+        );
+        $stmt->bind_param("sss", $nama, $passwordBaru, $email);
+    } else {
+        $stmt = $db->prepare(
+            "UPDATE pengguna SET nama = ? WHERE email = ?"
+        );
+        $stmt->bind_param("ss", $nama, $email);
+    }
+    if ($stmt->execute()) {
+        echo "<div class='alert alert-success'>Profil berhasil diperbarui</div>";
+        echo "<a href='index.php'>Kembali</a>";
+    } else {
+        echo "<div class='alert alert-danger'>Gagal memperbarui profil</div>";
+    }
 }else {
     echo "Aksi tidak dikenali.";
 }

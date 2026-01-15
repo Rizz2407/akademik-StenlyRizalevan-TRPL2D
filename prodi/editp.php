@@ -4,15 +4,7 @@ $id = $_GET['id'] ?? '';
 $sql = $db->query("SELECT * FROM prodi WHERE prodi_id = '$id'");
 $data = $sql->fetch_assoc();
 ?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Edit Data Prodi</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
-  </head>
-  <body>
+<body>
     <div class="container my-4">
         <form method="POST" action="proses.php?aksi=updatep">
             <h1>Edit Data Prodi</h1>
@@ -41,4 +33,3 @@ $data = $sql->fetch_assoc();
             </div>
         </form>
 </body>
-</html>

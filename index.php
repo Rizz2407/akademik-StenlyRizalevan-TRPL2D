@@ -1,7 +1,6 @@
 <?php
-// session
-session_start();
 //cek login
+session_start();
 if (!isset($_SESSION['login'])) {
     header('Location: login.php');
     exit;
@@ -31,7 +30,7 @@ if (!isset($_SESSION['login'])) {
                 <a class="nav-link" href="index.php?page=home">Home</a>
                 <a class="nav-link" href="index.php?page=datamahasiswa">Data Mahasiswa</a>
                 <a class="nav-link" href="index.php?page=dataprodi">Data Prodi</a>
-                <a class="nav-link active" href="index.php">Data Akademik</a>
+                <a class="nav-link" href="index.php?page=editpengguna">Edit Pengguna</a>
             </div>
             <div class="navbar-nav ms-auto">
                 <a class="nav-link" href="logout.php">Logout</a>
@@ -50,6 +49,7 @@ if (!isset($_SESSION['login'])) {
     if ($page == 'dataprodi') include 'prodi/listp.php';
     if ($page == 'createp') include 'prodi/createp.php';
     if ($page == 'editp') include 'prodi/editp.php';
+    if ($page == 'editpengguna') include 'editpengguna.php';
 ?>
 </div>
 
